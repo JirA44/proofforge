@@ -26,3 +26,16 @@ curl -X POST http://localhost:8000/v1/proof-obligation-coverage-dossiers -H 'Con
 
 ## Pour qui ?
 Devs, auditeurs, ops, chercheurs — qui ont besoin d'une preuve opposable, pas d'un verdict déclaratif.
+
+## Problèmes réglés (détaillés)
+- **Proofforge** → - Preuve / dossier / trace non opposable → résolu par dossier immuable et hash SHA-256
+- **Proofforge** → - Verdict déclaratif sans justification → le dossier expose obligations, fournisseurs et ratios
+- **Proofforge** → - Chaînage caché ou lacune invisible → serveur recharge et recalcule indépendamment du client
+- **Proofforge** → - Tiers qui ne peut pas relancer → le dossier est public et rejouable sans clé client
+
+## Exemples d'utilisation (scénarios réels)
+- **Audit thèse / mémoire** → le dossier sert de preuve technique (pas d'autorité déclarative)
+- **Dossier réglementaire (médical/finance)** → le dossier sert de preuve technique (pas d'autorité déclarative)
+- **Revue scientifique ouverte** → le dossier sert de preuve technique (pas d'autorité déclarative)
+
+
