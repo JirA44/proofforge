@@ -1,0 +1,1997 @@
+openapi: 3.1.0
+info:
+  title: ProofForge API
+  description: Propositions, arguments, cohérence, stabilité et couverture d'obligations
+    de preuves immuables avec vérification machine déterministe.
+  version: 1.0.7
+paths:
+  /health:
+    get:
+      summary: Health
+      operationId: health_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /info:
+    get:
+      summary: Info
+      operationId: info_info_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/propositions:
+    get:
+      summary: List Propositions
+      operationId: list_propositions_v1_propositions_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Proposition'
+                type: array
+                title: Response List Propositions V1 Propositions Get
+    post:
+      summary: Create Proposition
+      operationId: create_proposition_v1_propositions_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropositionCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposition'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/verifications:
+    post:
+      summary: Create Verification
+      operationId: create_verification_v1_verifications_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificationCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verification'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/arguments:
+    get:
+      summary: List Arguments
+      operationId: list_arguments_v1_arguments_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Argument'
+                type: array
+                title: Response List Arguments V1 Arguments Get
+    post:
+      summary: Create Argument
+      operationId: create_argument_v1_arguments_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArgumentCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Argument'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/entailments:
+    post:
+      summary: Check Entailment
+      operationId: check_entailment_v1_entailments_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntailmentCheckCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntailmentCheck'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/formula-comparisons:
+    get:
+      summary: List Formula Comparisons
+      operationId: list_formula_comparisons_v1_formula_comparisons_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/FormulaComparison'
+                type: array
+                title: Response List Formula Comparisons V1 Formula Comparisons Get
+    post:
+      summary: Compare Formulae
+      operationId: compare_formulae_v1_formula_comparisons_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormulaComparisonCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormulaComparison'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/formula-comparisons/{comparison_id}:
+    get:
+      summary: Get Formula Comparison
+      operationId: get_formula_comparison_v1_formula_comparisons__comparison_id__get
+      parameters:
+      - name: comparison_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Comparison Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormulaComparison'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/premise-sets:
+    get:
+      summary: List Premise Sets
+      operationId: list_premise_sets_v1_premise_sets_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PremiseSet'
+                type: array
+                title: Response List Premise Sets V1 Premise Sets Get
+    post:
+      summary: Create Premise Set
+      operationId: create_premise_set_v1_premise_sets_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PremiseSetCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PremiseSet'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/inconsistency-analyses:
+    post:
+      summary: Analyze Inconsistency
+      operationId: analyze_inconsistency_v1_inconsistency_analyses_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InconsistencyAnalysisCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InconsistencyAnalysis'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/inconsistency-analyses/{analysis_id}:
+    get:
+      summary: Get Inconsistency Analysis
+      operationId: get_inconsistency_analysis_v1_inconsistency_analyses__analysis_id__get
+      parameters:
+      - name: analysis_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Analysis Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InconsistencyAnalysis'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/proof-dependency-dossiers:
+    get:
+      summary: List Proof Dependency Dossiers
+      operationId: list_proof_dependency_dossiers_v1_proof_dependency_dossiers_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProofDependencyDossier'
+                type: array
+                title: Response List Proof Dependency Dossiers V1 Proof Dependency
+                  Dossiers Get
+    post:
+      summary: Create Proof Dependency Dossier
+      operationId: create_proof_dependency_dossier_v1_proof_dependency_dossiers_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProofDependencyDossierCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofDependencyDossier'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/proof-dependency-dossiers/{dossier_id}:
+    get:
+      summary: Get Proof Dependency Dossier
+      operationId: get_proof_dependency_dossier_v1_proof_dependency_dossiers__dossier_id__get
+      parameters:
+      - name: dossier_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Dossier Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofDependencyDossier'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/multi-argument-coherence-dossiers:
+    get:
+      summary: List Multi Argument Coherence Dossiers
+      operationId: list_multi_argument_coherence_dossiers_v1_multi_argument_coherence_dossiers_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MultiArgumentCoherenceDossier'
+                type: array
+                title: Response List Multi Argument Coherence Dossiers V1 Multi Argument
+                  Coherence Dossiers Get
+    post:
+      summary: Create Multi Argument Coherence Dossier
+      operationId: create_multi_argument_coherence_dossier_v1_multi_argument_coherence_dossiers_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiArgumentCoherenceCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiArgumentCoherenceDossier'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/multi-argument-coherence-dossiers/{dossier_id}:
+    get:
+      summary: Get Multi Argument Coherence Dossier
+      operationId: get_multi_argument_coherence_dossier_v1_multi_argument_coherence_dossiers__dossier_id__get
+      parameters:
+      - name: dossier_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Dossier Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiArgumentCoherenceDossier'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/proof-stability-dossiers:
+    get:
+      summary: List Proof Stability Dossiers
+      operationId: list_proof_stability_dossiers_v1_proof_stability_dossiers_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProofStabilityDossier'
+                type: array
+                title: Response List Proof Stability Dossiers V1 Proof Stability Dossiers
+                  Get
+    post:
+      summary: Create Proof Stability Dossier
+      operationId: create_proof_stability_dossier_v1_proof_stability_dossiers_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProofStabilityDossierCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofStabilityDossier'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/proof-stability-dossiers/{dossier_id}:
+    get:
+      summary: Get Proof Stability Dossier
+      operationId: get_proof_stability_dossier_v1_proof_stability_dossiers__dossier_id__get
+      parameters:
+      - name: dossier_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Dossier Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofStabilityDossier'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/proof-obligation-coverage-dossiers:
+    get:
+      summary: List Proof Obligation Coverage Dossiers
+      operationId: list_proof_obligation_coverage_dossiers_v1_proof_obligation_coverage_dossiers_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProofObligationCoverageDossier'
+                type: array
+                title: Response List Proof Obligation Coverage Dossiers V1 Proof Obligation
+                  Coverage Dossiers Get
+    post:
+      summary: Create Proof Obligation Coverage Dossier
+      operationId: create_proof_obligation_coverage_dossier_v1_proof_obligation_coverage_dossiers_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProofObligationCoverageDossierCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofObligationCoverageDossier'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/proof-obligation-coverage-dossiers/{dossier_id}:
+    get:
+      summary: Get Proof Obligation Coverage Dossier
+      operationId: get_proof_obligation_coverage_dossier_v1_proof_obligation_coverage_dossiers__dossier_id__get
+      parameters:
+      - name: dossier_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Dossier Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofObligationCoverageDossier'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Argument:
+      properties:
+        id:
+          type: string
+          title: Id
+        argument_hash:
+          type: string
+          title: Argument Hash
+        specification:
+          $ref: '#/components/schemas/ArgumentCreate'
+        immutable:
+          type: boolean
+          title: Immutable
+          default: true
+        created_at:
+          type: string
+          title: Created At
+      type: object
+      required:
+      - id
+      - argument_hash
+      - specification
+      - created_at
+      title: Argument
+    ArgumentCreate:
+      properties:
+        name:
+          type: string
+          maxLength: 200
+          minLength: 1
+          title: Name
+        premises:
+          items:
+            type: string
+          type: array
+          maxItems: 32
+          minItems: 1
+          title: Premises
+        conclusion:
+          type: string
+          maxLength: 1000
+          minLength: 1
+          title: Conclusion
+        variables:
+          items:
+            type: string
+          type: array
+          maxItems: 8
+          minItems: 1
+          title: Variables
+        language:
+          type: string
+          pattern: ^propositional-v1$
+          title: Language
+          default: propositional-v1
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - premises
+      - conclusion
+      - variables
+      title: ArgumentCreate
+    CoherenceNecessityWitness:
+      properties:
+        entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Entailment Ids
+        conclusion:
+          type: string
+          title: Conclusion
+        valuation:
+          anyOf:
+          - additionalProperties:
+              type: boolean
+            type: object
+          - type: 'null'
+          title: Valuation
+      type: object
+      required:
+      - entailment_ids
+      - conclusion
+      - valuation
+      title: CoherenceNecessityWitness
+    CoherenceProof:
+      properties:
+        entailment_id:
+          type: string
+          title: Entailment Id
+        argument_id:
+          type: string
+          title: Argument Id
+        conclusion:
+          type: string
+          title: Conclusion
+        variables:
+          items:
+            type: string
+          type: array
+          title: Variables
+        verdict:
+          type: string
+          title: Verdict
+        verification_valid:
+          type: boolean
+          title: Verification Valid
+        argument_hash:
+          type: string
+          title: Argument Hash
+        entailment_hash:
+          type: string
+          title: Entailment Hash
+      type: object
+      required:
+      - entailment_id
+      - argument_id
+      - conclusion
+      - variables
+      - verdict
+      - verification_valid
+      - argument_hash
+      - entailment_hash
+      title: CoherenceProof
+    ContradictionWitness:
+      properties:
+        kind:
+          type: string
+          enum:
+          - LOGICAL_NEGATION_OR_INCOMPATIBILITY
+          - JOINT_IMPOSSIBILITY
+          title: Kind
+        entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Entailment Ids
+        conclusions:
+          items:
+            type: string
+          type: array
+          title: Conclusions
+        necessity_witnesses:
+          items:
+            $ref: '#/components/schemas/CoherenceNecessityWitness'
+          type: array
+          title: Necessity Witnesses
+      type: object
+      required:
+      - kind
+      - entailment_ids
+      - conclusions
+      - necessity_witnesses
+      title: ContradictionWitness
+    EntailmentCheck:
+      properties:
+        id:
+          type: string
+          title: Id
+        argument_id:
+          type: string
+          title: Argument Id
+        method:
+          type: string
+          title: Method
+        verdict:
+          type: string
+          enum:
+          - ENTAILED
+          - NOT_ENTAILED
+          - INCONSISTENT_PREMISES
+          title: Verdict
+        valuations_checked:
+          type: integer
+          title: Valuations Checked
+        premise_models:
+          type: integer
+          title: Premise Models
+        counterexample:
+          anyOf:
+          - additionalProperties:
+              type: boolean
+            type: object
+          - type: 'null'
+          title: Counterexample
+        entailment_hash:
+          type: string
+          title: Entailment Hash
+        reproducible:
+          type: boolean
+          title: Reproducible
+          default: true
+        idempotent_replay:
+          type: boolean
+          title: Idempotent Replay
+          default: false
+        immutable:
+          type: boolean
+          title: Immutable
+          default: true
+        created_at:
+          type: string
+          title: Created At
+        warning:
+          type: string
+          title: Warning
+          default: Entaillement limité au langage formel déclaré ; il ne valide ni
+            les prémisses dans le monde réel ni une vérité empirique.
+      type: object
+      required:
+      - id
+      - argument_id
+      - method
+      - verdict
+      - valuations_checked
+      - premise_models
+      - entailment_hash
+      - created_at
+      title: EntailmentCheck
+    EntailmentCheckCreate:
+      properties:
+        argument_id:
+          type: string
+          minLength: 1
+          title: Argument Id
+        method:
+          type: string
+          const: truth-table-entailment-v1
+          title: Method
+          default: truth-table-entailment-v1
+      additionalProperties: false
+      type: object
+      required:
+      - argument_id
+      title: EntailmentCheckCreate
+    FormulaComparison:
+      properties:
+        id:
+          type: string
+          title: Id
+        input_hash:
+          type: string
+          title: Input Hash
+        specification:
+          $ref: '#/components/schemas/FormulaComparisonCreate'
+        verdict:
+          type: string
+          enum:
+          - EQUIVALENT
+          - NOT_EQUIVALENT
+          title: Verdict
+        valuations_checked:
+          type: integer
+          title: Valuations Checked
+        counterexample:
+          anyOf:
+          - $ref: '#/components/schemas/FormulaCounterexample'
+          - type: 'null'
+        comparison_hash:
+          type: string
+          title: Comparison Hash
+        reproducible:
+          type: boolean
+          title: Reproducible
+          default: true
+        idempotent_replay:
+          type: boolean
+          title: Idempotent Replay
+          default: false
+        immutable:
+          type: boolean
+          title: Immutable
+          default: true
+        created_at:
+          type: string
+          title: Created At
+        warning:
+          type: string
+          title: Warning
+          default: Équivalence limitée au langage formel déclaré ; elle ne démontre
+            aucune équivalence empirique entre les phénomènes éventuellement représentés.
+      type: object
+      required:
+      - id
+      - input_hash
+      - specification
+      - verdict
+      - valuations_checked
+      - comparison_hash
+      - created_at
+      title: FormulaComparison
+    FormulaComparisonCreate:
+      properties:
+        name:
+          type: string
+          maxLength: 200
+          minLength: 1
+          title: Name
+        left_expression:
+          type: string
+          maxLength: 1000
+          minLength: 1
+          title: Left Expression
+        right_expression:
+          type: string
+          maxLength: 1000
+          minLength: 1
+          title: Right Expression
+        variables:
+          items:
+            type: string
+          type: array
+          maxItems: 8
+          minItems: 1
+          title: Variables
+        method:
+          type: string
+          const: truth-table-equivalence-v1
+          title: Method
+          default: truth-table-equivalence-v1
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - left_expression
+      - right_expression
+      - variables
+      title: FormulaComparisonCreate
+    FormulaCounterexample:
+      properties:
+        valuation:
+          additionalProperties:
+            type: boolean
+          type: object
+          title: Valuation
+        left_value:
+          type: boolean
+          title: Left Value
+        right_value:
+          type: boolean
+          title: Right Value
+      type: object
+      required:
+      - valuation
+      - left_value
+      - right_value
+      title: FormulaCounterexample
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    InconsistencyAnalysis:
+      properties:
+        id:
+          type: string
+          title: Id
+        premise_set_id:
+          type: string
+          title: Premise Set Id
+        method:
+          type: string
+          title: Method
+        verdict:
+          type: string
+          enum:
+          - CONSISTENT
+          - INCONSISTENT
+          title: Verdict
+        valuations_checked:
+          type: integer
+          title: Valuations Checked
+        satisfying_assignment:
+          anyOf:
+          - additionalProperties:
+              type: boolean
+            type: object
+          - type: 'null'
+          title: Satisfying Assignment
+        core_indices:
+          items:
+            type: integer
+          type: array
+          title: Core Indices
+        minimal_core:
+          items:
+            type: string
+          type: array
+          title: Minimal Core
+        necessity_witnesses:
+          items:
+            $ref: '#/components/schemas/NecessityWitness'
+          type: array
+          title: Necessity Witnesses
+        minimality_verified:
+          type: boolean
+          title: Minimality Verified
+        analysis_hash:
+          type: string
+          title: Analysis Hash
+        reproducible:
+          type: boolean
+          title: Reproducible
+          default: true
+        immutable:
+          type: boolean
+          title: Immutable
+          default: true
+        idempotent_replay:
+          type: boolean
+          title: Idempotent Replay
+          default: false
+        created_at:
+          type: string
+          title: Created At
+        warning:
+          type: string
+          title: Warning
+          default: 'Cohérence limitée au calcul propositionnel déclaré : le noyau
+            est minimal par inclusion, pas nécessairement de cardinalité minimale,
+            et ne juge aucune vérité empirique.'
+      type: object
+      required:
+      - id
+      - premise_set_id
+      - method
+      - verdict
+      - valuations_checked
+      - core_indices
+      - minimal_core
+      - necessity_witnesses
+      - minimality_verified
+      - analysis_hash
+      - created_at
+      title: InconsistencyAnalysis
+    InconsistencyAnalysisCreate:
+      properties:
+        premise_set_id:
+          type: string
+          minLength: 1
+          title: Premise Set Id
+        method:
+          type: string
+          const: truth-table-minimal-unsat-core-v1
+          title: Method
+          default: truth-table-minimal-unsat-core-v1
+      additionalProperties: false
+      type: object
+      required:
+      - premise_set_id
+      title: InconsistencyAnalysisCreate
+    MultiArgumentCoherenceCreate:
+      properties:
+        entailment_ids:
+          items:
+            type: string
+          type: array
+          maxItems: 50
+          minItems: 2
+          title: Entailment Ids
+        method:
+          type: string
+          const: truth-table-multi-conclusion-coherence-v1
+          title: Method
+          default: truth-table-multi-conclusion-coherence-v1
+      additionalProperties: false
+      type: object
+      required:
+      - entailment_ids
+      title: MultiArgumentCoherenceCreate
+    MultiArgumentCoherenceDossier:
+      properties:
+        id:
+          type: string
+          title: Id
+        entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Entailment Ids
+        method:
+          type: string
+          title: Method
+        qualification:
+          type: string
+          enum:
+          - CONSISTENT
+          - CONTRADICTORY
+          - INSUFFICIENT
+          - INCOMPATIBLE
+          title: Qualification
+        variables:
+          items:
+            type: string
+          type: array
+          title: Variables
+        canonical_conclusions:
+          items:
+            type: string
+          type: array
+          title: Canonical Conclusions
+        proofs:
+          items:
+            $ref: '#/components/schemas/CoherenceProof'
+          type: array
+          title: Proofs
+        contradiction_witnesses:
+          items:
+            $ref: '#/components/schemas/ContradictionWitness'
+          type: array
+          title: Contradiction Witnesses
+        satisfying_assignment:
+          anyOf:
+          - additionalProperties:
+              type: boolean
+            type: object
+          - type: 'null'
+          title: Satisfying Assignment
+        issues:
+          items:
+            type: string
+          type: array
+          title: Issues
+        valuations_checked:
+          type: integer
+          minimum: 0.0
+          title: Valuations Checked
+        snapshot_hash:
+          type: string
+          title: Snapshot Hash
+        dossier_hash:
+          type: string
+          title: Dossier Hash
+        immutable:
+          type: boolean
+          title: Immutable
+          default: true
+        reproducible:
+          type: boolean
+          title: Reproducible
+          default: true
+        idempotent_replay:
+          type: boolean
+          title: Idempotent Replay
+          default: false
+        created_at:
+          type: string
+          title: Created At
+        warning:
+          type: string
+          title: Warning
+          default: La cohérence est limitée au calcul propositionnel déclaré et aux
+            preuves persistées ; elle ne démontre ni vérité empirique ni compatibilité
+            métier.
+      type: object
+      required:
+      - id
+      - entailment_ids
+      - method
+      - qualification
+      - variables
+      - canonical_conclusions
+      - proofs
+      - contradiction_witnesses
+      - issues
+      - valuations_checked
+      - snapshot_hash
+      - dossier_hash
+      - created_at
+      title: MultiArgumentCoherenceDossier
+    NecessityWitness:
+      properties:
+        removed_index:
+          type: integer
+          minimum: 0.0
+          title: Removed Index
+        removed_premise:
+          type: string
+          title: Removed Premise
+        valuation:
+          anyOf:
+          - additionalProperties:
+              type: boolean
+            type: object
+          - type: 'null'
+          title: Valuation
+      type: object
+      required:
+      - removed_index
+      - removed_premise
+      - valuation
+      title: NecessityWitness
+    PremiseSet:
+      properties:
+        id:
+          type: string
+          title: Id
+        premise_set_hash:
+          type: string
+          title: Premise Set Hash
+        specification:
+          $ref: '#/components/schemas/PremiseSetCreate'
+        immutable:
+          type: boolean
+          title: Immutable
+          default: true
+        created_at:
+          type: string
+          title: Created At
+      type: object
+      required:
+      - id
+      - premise_set_hash
+      - specification
+      - created_at
+      title: PremiseSet
+    PremiseSetCreate:
+      properties:
+        name:
+          type: string
+          maxLength: 200
+          minLength: 1
+          title: Name
+        premises:
+          items:
+            type: string
+          type: array
+          maxItems: 32
+          minItems: 1
+          title: Premises
+        variables:
+          items:
+            type: string
+          type: array
+          maxItems: 8
+          minItems: 1
+          title: Variables
+        language:
+          type: string
+          const: propositional-v1
+          title: Language
+          default: propositional-v1
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - premises
+      - variables
+      title: PremiseSetCreate
+    ProofCoverageReference:
+      properties:
+        entailment_id:
+          type: string
+          title: Entailment Id
+        argument_id:
+          type: string
+          title: Argument Id
+        argument_name:
+          type: string
+          title: Argument Name
+        conclusion:
+          type: string
+          title: Conclusion
+        verdict:
+          type: string
+          title: Verdict
+        verification_valid:
+          type: boolean
+          title: Verification Valid
+        obligation_count:
+          type: integer
+          minimum: 0.0
+          title: Obligation Count
+        covered_obligation_count:
+          type: integer
+          minimum: 0.0
+          title: Covered Obligation Count
+        coverage_ratio:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Coverage Ratio
+        argument_hash:
+          type: string
+          title: Argument Hash
+        entailment_hash:
+          type: string
+          title: Entailment Hash
+        created_at:
+          type: string
+          title: Created At
+      type: object
+      required:
+      - entailment_id
+      - argument_id
+      - argument_name
+      - conclusion
+      - verdict
+      - verification_valid
+      - obligation_count
+      - covered_obligation_count
+      - coverage_ratio
+      - argument_hash
+      - entailment_hash
+      - created_at
+      title: ProofCoverageReference
+    ProofDependencyDossier:
+      properties:
+        id:
+          type: string
+          title: Id
+        root_entailment_id:
+          type: string
+          title: Root Entailment Id
+        method:
+          type: string
+          title: Method
+        qualification:
+          type: string
+          enum:
+          - CLOSED
+          - OPEN_ASSUMPTIONS
+          - CYCLIC
+          - INVALID
+          title: Qualification
+        nodes:
+          items:
+            $ref: '#/components/schemas/ProofDependencyNode'
+          type: array
+          title: Nodes
+        edges:
+          items:
+            $ref: '#/components/schemas/ProofDependencyEdge'
+          type: array
+          title: Edges
+        reachable_entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Reachable Entailment Ids
+        unused_entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Unused Entailment Ids
+        open_assumptions:
+          items:
+            type: string
+          type: array
+          title: Open Assumptions
+        cycles:
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+          title: Cycles
+        evidence_hash:
+          type: string
+          title: Evidence Hash
+        dossier_hash:
+          type: string
+          title: Dossier Hash
+        immutable:
+          type: boolean
+          title: Immutable
+          default: true
+        reproducible:
+          type: boolean
+          title: Reproducible
+          default: true
+        idempotent_replay:
+          type: boolean
+          title: Idempotent Replay
+          default: false
+        created_at:
+          type: string
+          title: Created At
+        warning:
+          type: string
+          title: Warning
+          default: La fermeture porte uniquement sur les formules exactes et les preuves
+            fournies. Elle ne démontre ni la vérité empirique des hypothèses ni leur
+            pertinence.
+      type: object
+      required:
+      - id
+      - root_entailment_id
+      - method
+      - qualification
+      - nodes
+      - edges
+      - reachable_entailment_ids
+      - unused_entailment_ids
+      - open_assumptions
+      - cycles
+      - evidence_hash
+      - dossier_hash
+      - created_at
+      title: ProofDependencyDossier
+    ProofDependencyDossierCreate:
+      properties:
+        root_entailment_id:
+          type: string
+          minLength: 1
+          title: Root Entailment Id
+        supporting_entailment_ids:
+          items:
+            type: string
+          type: array
+          maxItems: 49
+          title: Supporting Entailment Ids
+        method:
+          type: string
+          const: exact-formula-dependency-v1
+          title: Method
+          default: exact-formula-dependency-v1
+      additionalProperties: false
+      type: object
+      required:
+      - root_entailment_id
+      title: ProofDependencyDossierCreate
+    ProofDependencyEdge:
+      properties:
+        provider_entailment_id:
+          type: string
+          title: Provider Entailment Id
+        consumer_entailment_id:
+          type: string
+          title: Consumer Entailment Id
+        formula:
+          type: string
+          title: Formula
+      type: object
+      required:
+      - provider_entailment_id
+      - consumer_entailment_id
+      - formula
+      title: ProofDependencyEdge
+    ProofDependencyNode:
+      properties:
+        entailment_id:
+          type: string
+          title: Entailment Id
+        argument_id:
+          type: string
+          title: Argument Id
+        conclusion:
+          type: string
+          title: Conclusion
+        premises:
+          items:
+            type: string
+          type: array
+          title: Premises
+        verdict:
+          type: string
+          title: Verdict
+        verification_valid:
+          type: boolean
+          title: Verification Valid
+      type: object
+      required:
+      - entailment_id
+      - argument_id
+      - conclusion
+      - premises
+      - verdict
+      - verification_valid
+      title: ProofDependencyNode
+    ProofObligation:
+      properties:
+        consumer_entailment_id:
+          type: string
+          title: Consumer Entailment Id
+        premise_index:
+          type: integer
+          minimum: 0.0
+          title: Premise Index
+        formula:
+          type: string
+          title: Formula
+        status:
+          type: string
+          enum:
+          - COVERED
+          - UNCOVERED
+          title: Status
+        provider_entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Provider Entailment Ids
+      type: object
+      required:
+      - consumer_entailment_id
+      - premise_index
+      - formula
+      - status
+      - provider_entailment_ids
+      title: ProofObligation
+    ProofObligationCoverageDossier:
+      properties:
+        id:
+          type: string
+          title: Id
+        entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Entailment Ids
+        ordered_entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Ordered Entailment Ids
+        method:
+          type: string
+          title: Method
+        qualification:
+          type: string
+          enum:
+          - COMPLETE
+          - GAPPED
+          - INSUFFICIENT
+          - INCOMPATIBLE
+          title: Qualification
+        references:
+          items:
+            $ref: '#/components/schemas/ProofCoverageReference'
+          type: array
+          title: References
+        obligations:
+          items:
+            $ref: '#/components/schemas/ProofObligation'
+          type: array
+          title: Obligations
+        total_obligation_count:
+          type: integer
+          minimum: 0.0
+          title: Total Obligation Count
+        covered_obligation_count:
+          type: integer
+          minimum: 0.0
+          title: Covered Obligation Count
+        uncovered_obligation_count:
+          type: integer
+          minimum: 0.0
+          title: Uncovered Obligation Count
+        coverage_ratio:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Coverage Ratio
+        orphan_provider_entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Orphan Provider Entailment Ids
+        worst_reference:
+          $ref: '#/components/schemas/ProofCoverageReference'
+        issues:
+          items:
+            type: string
+          type: array
+          title: Issues
+        snapshot_hash:
+          type: string
+          title: Snapshot Hash
+        dossier_hash:
+          type: string
+          title: Dossier Hash
+        immutable:
+          type: boolean
+          title: Immutable
+          default: true
+        reproducible:
+          type: boolean
+          title: Reproducible
+          default: true
+        idempotent_replay:
+          type: boolean
+          title: Idempotent Replay
+          default: false
+        created_at:
+          type: string
+          title: Created At
+        warning:
+          type: string
+          title: Warning
+          default: La couverture repose uniquement sur la correspondance exacte entre
+            conclusions formellement vérifiées et prémisses sélectionnées. Elle ne
+            prouve ni la vérité empirique des prémisses ni l'exhaustivité des obligations
+            métier.
+      type: object
+      required:
+      - id
+      - entailment_ids
+      - ordered_entailment_ids
+      - method
+      - qualification
+      - references
+      - obligations
+      - total_obligation_count
+      - covered_obligation_count
+      - uncovered_obligation_count
+      - coverage_ratio
+      - orphan_provider_entailment_ids
+      - worst_reference
+      - issues
+      - snapshot_hash
+      - dossier_hash
+      - created_at
+      title: ProofObligationCoverageDossier
+    ProofObligationCoverageDossierCreate:
+      properties:
+        entailment_ids:
+          items:
+            type: string
+          type: array
+          maxItems: 100
+          minItems: 2
+          title: Entailment Ids
+        method:
+          type: string
+          const: exact-premise-obligation-coverage-v1
+          title: Method
+          default: exact-premise-obligation-coverage-v1
+      additionalProperties: false
+      type: object
+      required:
+      - entailment_ids
+      title: ProofObligationCoverageDossierCreate
+    ProofStabilityDossier:
+      properties:
+        id:
+          type: string
+          title: Id
+        entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Entailment Ids
+        chronological_entailment_ids:
+          items:
+            type: string
+          type: array
+          title: Chronological Entailment Ids
+        method:
+          type: string
+          title: Method
+        qualification:
+          type: string
+          enum:
+          - STABLE
+          - REGRESSED
+          - RECOVERED
+          - INSUFFICIENT
+          - INCOMPATIBLE
+          title: Qualification
+        entries:
+          items:
+            $ref: '#/components/schemas/StabilityEntry'
+          type: array
+          title: Entries
+        transitions:
+          items:
+            $ref: '#/components/schemas/StabilityTransition'
+          type: array
+          title: Transitions
+        dependencies:
+          items:
+            $ref: '#/components/schemas/StabilityDependency'
+          type: array
+          title: Dependencies
+        regression_count:
+          type: integer
+          minimum: 0.0
+          title: Regression Count
+        recovery_count:
+          type: integer
+          minimum: 0.0
+          title: Recovery Count
+        longest_stable_streak:
+          $ref: '#/components/schemas/StableStreak'
+        worst_transition:
+          $ref: '#/components/schemas/StabilityTransition'
+        issues:
+          items:
+            type: string
+          type: array
+          title: Issues
+        snapshot_hash:
+          type: string
+          title: Snapshot Hash
+        dossier_hash:
+          type: string
+          title: Dossier Hash
+        immutable:
+          type: boolean
+          title: Immutable
+          default: true
+        reproducible:
+          type: boolean
+          title: Reproducible
+          default: true
+        idempotent_replay:
+          type: boolean
+          title: Idempotent Replay
+          default: false
+        created_at:
+          type: string
+          title: Created At
+        warning:
+          type: string
+          title: Warning
+          default: La stabilité décrit uniquement des transitions formelles recalculées.
+            Elle ne prouve aucune vérité empirique et n’accorde aucune autorisation
+            automatique.
+      type: object
+      required:
+      - id
+      - entailment_ids
+      - chronological_entailment_ids
+      - method
+      - qualification
+      - entries
+      - transitions
+      - dependencies
+      - regression_count
+      - recovery_count
+      - longest_stable_streak
+      - worst_transition
+      - issues
+      - snapshot_hash
+      - dossier_hash
+      - created_at
+      title: ProofStabilityDossier
+    ProofStabilityDossierCreate:
+      properties:
+        entailment_ids:
+          items:
+            type: string
+          type: array
+          maxItems: 100
+          minItems: 2
+          title: Entailment Ids
+        method:
+          type: string
+          const: chronological-entailment-stability-v1
+          title: Method
+          default: chronological-entailment-stability-v1
+      additionalProperties: false
+      type: object
+      required:
+      - entailment_ids
+      title: ProofStabilityDossierCreate
+    Proposition:
+      properties:
+        id:
+          type: string
+          title: Id
+        proposition_hash:
+          type: string
+          title: Proposition Hash
+        specification:
+          $ref: '#/components/schemas/PropositionCreate'
+        immutable:
+          type: boolean
+          title: Immutable
+          default: true
+        created_at:
+          type: string
+          title: Created At
+      type: object
+      required:
+      - id
+      - proposition_hash
+      - specification
+      - created_at
+      title: Proposition
+    PropositionCreate:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          title: Name
+        statement:
+          type: string
+          minLength: 1
+          title: Statement
+        formal_expression:
+          type: string
+          maxLength: 1000
+          minLength: 1
+          title: Formal Expression
+        variables:
+          items:
+            type: string
+          type: array
+          maxItems: 8
+          minItems: 1
+          title: Variables
+        language:
+          type: string
+          pattern: ^propositional-v1$
+          title: Language
+          default: propositional-v1
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - statement
+      - formal_expression
+      - variables
+      title: PropositionCreate
+    StabilityDependency:
+      properties:
+        provider_entailment_id:
+          type: string
+          title: Provider Entailment Id
+        consumer_entailment_id:
+          type: string
+          title: Consumer Entailment Id
+        formula:
+          type: string
+          title: Formula
+      type: object
+      required:
+      - provider_entailment_id
+      - consumer_entailment_id
+      - formula
+      title: StabilityDependency
+    StabilityEntry:
+      properties:
+        position:
+          type: integer
+          minimum: 0.0
+          title: Position
+        entailment_id:
+          type: string
+          title: Entailment Id
+        argument_id:
+          type: string
+          title: Argument Id
+        argument_name:
+          type: string
+          title: Argument Name
+        verdict:
+          type: string
+          title: Verdict
+        conclusion:
+          type: string
+          title: Conclusion
+        premises:
+          items:
+            type: string
+          type: array
+          title: Premises
+        variables:
+          items:
+            type: string
+          type: array
+          title: Variables
+        counterexample:
+          anyOf:
+          - additionalProperties:
+              type: boolean
+            type: object
+          - type: 'null'
+          title: Counterexample
+        premise_models:
+          type: integer
+          minimum: 0.0
+          title: Premise Models
+        verification_valid:
+          type: boolean
+          title: Verification Valid
+        argument_hash:
+          type: string
+          title: Argument Hash
+        entailment_hash:
+          type: string
+          title: Entailment Hash
+        created_at:
+          type: string
+          title: Created At
+      type: object
+      required:
+      - position
+      - entailment_id
+      - argument_id
+      - argument_name
+      - verdict
+      - conclusion
+      - premises
+      - variables
+      - counterexample
+      - premise_models
+      - verification_valid
+      - argument_hash
+      - entailment_hash
+      - created_at
+      title: StabilityEntry
+    StabilityTransition:
+      properties:
+        from_entailment_id:
+          type: string
+          title: From Entailment Id
+        to_entailment_id:
+          type: string
+          title: To Entailment Id
+        from_verdict:
+          type: string
+          title: From Verdict
+        to_verdict:
+          type: string
+          title: To Verdict
+        kind:
+          type: string
+          enum:
+          - STABLE
+          - REGRESSION
+          - RECOVERY
+          - INSUFFICIENT_CHANGE
+          title: Kind
+        witness:
+          anyOf:
+          - additionalProperties:
+              type: boolean
+            type: object
+          - type: 'null'
+          title: Witness
+      type: object
+      required:
+      - from_entailment_id
+      - to_entailment_id
+      - from_verdict
+      - to_verdict
+      - kind
+      - witness
+      title: StabilityTransition
+    StableStreak:
+      properties:
+        verdict:
+          type: string
+          title: Verdict
+        length:
+          type: integer
+          minimum: 1.0
+          title: Length
+        start_entailment_id:
+          type: string
+          title: Start Entailment Id
+        end_entailment_id:
+          type: string
+          title: End Entailment Id
+      type: object
+      required:
+      - verdict
+      - length
+      - start_entailment_id
+      - end_entailment_id
+      title: StableStreak
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Verification:
+      properties:
+        id:
+          type: string
+          title: Id
+        proposition_id:
+          type: string
+          title: Proposition Id
+        method:
+          type: string
+          title: Method
+        verdict:
+          type: string
+          title: Verdict
+        valuations_checked:
+          type: integer
+          title: Valuations Checked
+        counterexample:
+          anyOf:
+          - additionalProperties:
+              type: boolean
+            type: object
+          - type: 'null'
+          title: Counterexample
+        verification_hash:
+          type: string
+          title: Verification Hash
+        reproducible:
+          type: boolean
+          title: Reproducible
+        idempotent_replay:
+          type: boolean
+          title: Idempotent Replay
+          default: false
+        created_at:
+          type: string
+          title: Created At
+        warning:
+          type: string
+          title: Warning
+          default: Verdict limité au langage formel vérifié ; aucune vérité empirique
+            n’est déduite.
+      type: object
+      required:
+      - id
+      - proposition_id
+      - method
+      - verdict
+      - valuations_checked
+      - verification_hash
+      - reproducible
+      - created_at
+      title: Verification
+    VerificationCreate:
+      properties:
+        proposition_id:
+          type: string
+          title: Proposition Id
+        method:
+          type: string
+          pattern: ^truth-table-v1$
+          title: Method
+          default: truth-table-v1
+      additionalProperties: false
+      type: object
+      required:
+      - proposition_id
+      title: VerificationCreate
