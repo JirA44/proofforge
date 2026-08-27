@@ -1,3 +1,5 @@
+> **Présentation → [docs/PRESENTATION.md](docs/PRESENTATION.md)** — à quoi ça sert, cas d'usages, usages futurs.
+
 # ProofForge V1.07
 
 ProofForge enregistre des propositions et des arguments immuables, puis vérifie leur forme par calcul déterministe. Le client soumet des expressions, jamais un verdict.
@@ -157,3 +159,4 @@ Guides complémentaires : [exemples d'utilisation](docs/USAGE_EXAMPLES.md) et [c
 ```powershell
 ./scripts/Test.ps1
 ```
+
