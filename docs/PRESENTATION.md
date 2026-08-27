@@ -1,4 +1,4 @@
-# Proofforge — Présentation complète
+# ProofForge — Présentation complète
 
 ## Présentation
 proofforge est un registre immuable, hashé (SHA-256), auditable et rejouable.
